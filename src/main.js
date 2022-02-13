@@ -9,6 +9,10 @@ function run() {
 
   console.log("setting up renderer with canvas 'gl'");
   var renderer = new Renderer(canvas);
+  var program = renderer.createProgram('my-sample-program');
+  program.commit();
+  program.commit();
+  program.commit();
 
   window.requestAnimationFrame(ts => mainLoop(renderer, ts));
 }
