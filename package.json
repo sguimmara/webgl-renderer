@@ -1,0 +1,26 @@
+{
+  "name": "webgl-renderer",
+  "version": "0.1.0",
+  "description": "A very simple WebGL renderer",
+  "main": "./dist/index.js",
+  "scripts": {
+    "start": "node ./node_modules/parcel-bundler/bin/cli serve ./src/index.html --port 8080",
+    "build": "node ./node_modules/parcel-bundler/bin/cli build ./src/index.html --out-dir ./dist/",
+    "lint": "node ./node_modules/eslint/bin/eslint . --ext .js --fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sguimmara/webgl-renderer"
+  },
+  "keywords": [
+    "webgl"
+  ],
+  "author": "Sébastien Guimmara",
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^8.9.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.25.4",
+    "parcel-bundler": "^1.12.5"
+  }
+}
