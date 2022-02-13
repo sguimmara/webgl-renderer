@@ -1,3 +1,4 @@
+import { Mesh } from './mesh.js';
 import { Pipeline } from './pipeline.js';
 
 /**
@@ -11,21 +12,37 @@ export class Renderer {
         this.setupViewport();
     }
 
-    render(timestamp) {
-        console.log("render " + timestamp);
+    clear() {
         this.GL.clear(this.GL.COLOR_BUFFER_BIT | this.GL.DEPTH_BUFFER_BIT);
     }
 
+    renderMesh(mesh, pipeline) {
+        pipeline.bind();
+
+        this.GL.bindBuffer(this.GL.ARRAY_BUFFER, mesh.positionBuffer.glBuffer);
+        var posAttr = this.GL.getAttribLocation(pipeline.program, "position");
+        this.GL.enableVertexAttribArray(posAttr);
+        this.GL.vertexAttribPointer(posAttr, 3, this.GL.FLOAT, false, 0, 0);
+
+        this.GL.bindBuffer(this.GL.ELEMENT_ARRAY_BUFFER, mesh.indexBuffer.glBuffer);
+
+        this.GL.drawElements(this.GL.TRIANGLES, 6, this.GL.UNSIGNED_SHORT, 0);
+    }
+
     setupViewport() {
+        console.log(`setting up viewport [${this.canvas.width}, ${this.canvas.height}]`);
         this.GL.viewport(0, 0, this.canvas.width, this.canvas.height);
         this.GL.enable(this.GL.DEPTH_TEST);
         this.GL.clearColor(0.33, 0.33, 0.33, 1.0);
         this.GL.depthFunc(this.GL.LEQUAL);
     }
 
-    createProgram(name) {
-        console.log(`creating Pipeline <${name}>`);
+    createPipeline(name) {
         return new Pipeline(this.GL, name);
+    }
+
+    createMesh(name) {
+        return new Mesh(this.GL, name);
     }
 }
 
@@ -39,7 +56,6 @@ function getContext(canvas) {
         return canvas.getContext("webgl");
     }
     catch (e) {
-        console.error(e);
         alert("Unable to initialize WebGL.");
         return null;
     }

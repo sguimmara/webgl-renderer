@@ -20,10 +20,10 @@ export class Pipeline {
             return;
         }
 
-        console.log(`compiling Pipeline <${this.name}>`);
+        console.log(`${this.describe()}: compiling Pipeline`);
 
         if (!this.vertex_shader || !this.fragment_shader) {
-            throw new Error("cannot commit Pipeline, missing shaders");
+            throw new Error(`${this.describe()}: cannot commit Pipeline, missing shaders`);
         }
 
         if (!this.program) {
@@ -42,15 +42,29 @@ export class Pipeline {
         this.dirty = false;
     }
 
-    /**
-     * @param {String} source
-     */
-    set vertexShader (source) { this.vertex_shader = this.createShader(source, VertexShader); }
+    bind() {
+        this.commit();
+
+        this.gl.useProgram(this.program);
+    }
+
+    describe() { return `<Pipeline ${this.name}>` }
 
     /**
      * @param {String} source
      */
-    set fragmentShader (source) { this.fragment_shader = this.createShader(source, FragmentShader); }
+    set vertexShader (source) { 
+        this.vertex_shader = this.createShader(source, VertexShader);
+        this.dirty = true;
+    }
+
+    /**
+     * @param {String} source
+     */
+    set fragmentShader (source) {
+        this.fragment_shader = this.createShader(source, FragmentShader);
+        this.dirty = true;
+    }
 
     mapShaderType(type) {
         switch (type) {
@@ -62,8 +76,9 @@ export class Pipeline {
     }
 
     createShader(source, type) {
-        var result = this.gl.createShader(type);
+        var result = this.gl.createShader(this.mapShaderType(type));
         this.gl.shaderSource(result, source);
         this.gl.compileShader(result);
+        return result;
     }
 }
