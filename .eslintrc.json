@@ -6,7 +6,8 @@
     "worker": true
   },
   "parserOptions": {
-    "ecmaVersion": 10,
-    "sourceType": "script"
+    "ecmaVersion": 11,
+    "impliedStrict": true,
+    "sourceType": "module"
   }
 }
