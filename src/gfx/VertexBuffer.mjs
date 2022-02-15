@@ -1,8 +1,8 @@
 export default class VertexBuffer {
   /**
-   * 
+   *
    * @param {WebGLRenderingContext} gl The WebGL rendering context.
-   * @param {number[]} vertices 
+   * @param {number[]} vertices
    */
   constructor(gl, vertices) {
     this.gl = gl;

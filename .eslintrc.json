@@ -9,5 +9,8 @@
     "ecmaVersion": 11,
     "impliedStrict": true,
     "sourceType": "module"
+  },
+  "rules": {
+    "no-bitwise": "off"
   }
 }

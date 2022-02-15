@@ -2,7 +2,7 @@ import IndexBuffer from './IndexBuffer';
 import VertexBuffer from './VertexBuffer';
 
 export default class Mesh {
-    /**
+  /**
      * @param {WebGLRenderingContext} gl The WebGL rendering context.
      * @param {string} name The name of this object.
      */

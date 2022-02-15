@@ -1,14 +1,14 @@
 import 'regenerator-runtime/runtime';
+import Entity from './Entity';
 
 import Renderer from './gfx/Renderer';
 
-let mesh;
-let pipeline;
+let entity;
 const CLIP_Z = 0.1;
 
 function mainLoop(renderer) {
   renderer.clear();
-  renderer.renderMesh(mesh, pipeline);
+  renderer.render(entity);
   window.requestAnimationFrame(() => mainLoop(renderer));
 }
 
@@ -19,23 +19,19 @@ async function run() {
   }
 
   const renderer = new Renderer(canvas);
-  pipeline = renderer.createPipeline('my-sample-pipeline');
+  await renderer.initialize();
 
-  const vertexSource = (await (await fetch('/assets/shaders/default.vs')).text());
-  const fragmentSource = (await (await fetch('/assets/shaders/default.fs')).text());
-
-  pipeline.fragmentShader = fragmentSource;
-  pipeline.vertexShader = vertexSource;
-
-  pipeline.commit();
-  pipeline.commit();
-  pipeline.commit();
-
-  mesh = renderer.createMesh('my-mesh');
+  let material = renderer.createMaterial('default');
+ 
+  let mesh = renderer.createMesh('my-mesh');
   mesh.positions = [-0.6, -0.8, CLIP_Z,
     0.0, 0.8, CLIP_Z,
     0.6, -0.8, CLIP_Z];
   mesh.indices = [0, 1, 2, 0, 2, 1];
+  
+  entity = new Entity();
+  entity.mesh = mesh;
+  entity.material = material;
 
   window.requestAnimationFrame(() => mainLoop(renderer));
 }
