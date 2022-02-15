@@ -1,4 +1,9 @@
 export default class IndexBuffer {
+  /**
+   * Creates a new IndexBuffer.
+   * @param {WebGLRenderingContext} gl The WebGL rendering context.
+   * @param {number[]} indices The index array.
+   */
   constructor(gl, indices) {
     this.gl = gl;
     this.glBuffer = this.gl.createBuffer();

@@ -2,12 +2,22 @@ const VertexShader = Symbol('vertex-shader');
 const FragmentShader = Symbol('fragment-shader');
 
 export default class Pipeline {
-  constructor(glContext, name) {
+  /**
+   * @param {WebGLRenderingContext} gl The WebGL rendering context.
+   * @param {string} name The name of this object.
+   */
+  constructor(gl, name) {
+    /** @type string */
     this.name = name;
-    this.gl = glContext;
+    /** @type WebGLRenderingContext */
+    this.gl = gl;
+    /** @type WebGLShader */
     this.vertex_shader = undefined;
+    /** @type WebGLShader */
     this.fragment_shader = undefined;
+    /** @type WebGLProgram */
     this.program = undefined;
+    /** @type boolean */
     this.dirty = true;
   }
 
