@@ -113,6 +113,10 @@ progress {
   font: inherit; 
 }
 
+canvas {
+  width: 100%;
+}
+
 [hidden] {
   display: none;
 }
