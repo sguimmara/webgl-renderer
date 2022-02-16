@@ -1,5 +1,5 @@
-import IndexBuffer from './IndexBuffer';
-import VertexBuffer from './VertexBuffer';
+import IndexBuffer from '../renderer/IndexBuffer';
+import VertexBuffer from '../renderer/VertexBuffer';
 
 export default class Mesh {
   /**

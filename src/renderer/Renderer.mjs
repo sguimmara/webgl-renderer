@@ -1,5 +1,5 @@
-import MaterialBase from './Materials/MaterialBase';
-import Mesh from './Mesh';
+import MaterialBase from '../materials/MaterialBase';
+import Mesh from '../objects/Mesh';
 import ProgramFactory from './ProgramFactory';
 
 /**
