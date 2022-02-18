@@ -11,8 +11,8 @@ export default class ProgramLoader {
 	   * Initializes the cache with the default shaders.
 	   */
 	async initialize() {
-		await this.loadFromAssets('default.vs', 'default.fs', 'default');
-		await this.loadFromAssets('default.vs', 'solidColor.fs', 'solidColor');
+		await this.loadFromAssets('default.vert.glsl', 'default.frag.glsl', 'default');
+		await this.loadFromAssets('default.vert.glsl', 'solidColor.frag.glsl', 'solidColor');
 	}
 
 	/**
