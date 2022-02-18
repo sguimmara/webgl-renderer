@@ -1,7 +1,8 @@
 export default {
-    input: 'src/Gfx.mjs',
-    output: {
-      file: 'build/gfx.build.js',
-      format: 'cjs'
-    }
-  };
+	input: 'src/Gfx.mjs',
+	output: {
+		format: 'esm',
+		sourcemap: true,
+		file: './build/gfx.module.js'
+	}
+};

@@ -2,15 +2,25 @@
   "name": "webgl-renderer",
   "version": "0.1.0",
   "description": "A very simple WebGL renderer",
-  "main": "./build/gfx.build.js",
+  "main": "./build/gfx.module.js",
   "type": "module",
+  "exports": {
+    ".": {
+      "import": "./build/gfx.module.js"
+    },
+    "./src": "./src/*"
+  },
+  "files": [
+    "build/gfx.module.js"
+  ],
   "scripts": {
-    "clean-dist": "rm -rf dist/",
-    "copy-assets": "npm run clean-dist && mkdir -p dist/assets && cp -r assets dist/",
-    "start": "node ./node_modules/parcel-bundler/bin/cli serve ./examples/basic.html --port 8080",
+    "clean-dist": "rm -rf build/assets",
+    "copy-assets": "npm run clean-dist && mkdir -p build/assets && cp -r assets build/",
+    "start": "node ./node_modules/parcel-bundler/bin/cli serve ./examples/basic/index.html --port 8080",
     "lint": "node ./node_modules/eslint/bin/eslint . --ext .mjs --fix",
     "test": "mocha 'test/**/*.mjs' --require esm --recursive --timeout 60000 --exit",
-    "build": "rollup --config rollup.config.js"
+    "build": "rollup --config rollup.config.js",
+    "dev": "concurrently --names \"ROLLUP,HTTP\" -c \"bgBlue.bold,bgGreen.bold\" \"rollup -c rollup.config.js -w -m inline\" \"servez -p 8080\""
   },
   "repository": {
     "type": "git",
@@ -22,6 +32,7 @@
   "author": "Sébastien Guimmara",
   "license": "MIT",
   "devDependencies": {
+    "concurrently": "^7.0.0",
     "eslint": "^8.9.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.25.4",
@@ -30,11 +41,14 @@
     "mocha-junit-reporter": "^2.0.2",
     "parcel-bundler": "^1.12.5",
     "rollup": "^2.67.2",
+    "servez": "^1.12.1",
     "ts-node": "^10.5.0",
     "webpack-cli": "^4.9.2",
     "webpack-dev-server": "^4.7.4"
   },
   "dependencies": {
-    "regenerator-runtime": "^0.13.9"
+    "chalk": "^5.0.0",
+    "regenerator-runtime": "^0.13.9",
+    "uuid": "^8.3.2"
   }
 }

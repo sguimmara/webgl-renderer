@@ -1,29 +1,37 @@
-import IndexBuffer from '../renderer/IndexBuffer';
-import VertexBuffer from '../renderer/VertexBuffer';
+import BaseObject from './BaseObject.mjs';
 
-export default class Mesh {
-  /**
-     * @param {WebGLRenderingContext} gl The WebGL rendering context.
-     * @param {string} name The name of this object.
-     */
-  constructor(gl, name) {
-    /** @type string */
-    this.name = name;
-    /** @type WebGLRenderingContext */
-    this.gl = gl;
-    /** @type VertexBuffer */
-    this.positionBuffer = undefined;
-    /** @type IndexBuffer */
-    this.indexBuffer = undefined;
-  }
+export default class Mesh extends BaseObject {
+	constructor() {
+		super()
+		this.buffers =
+		{
+			'a_position': {
+				data: undefined
+			}
+		};
+		/** @type {number[]} */
+		this.indexBuffer = undefined;
+		this.count = 0;
+	}
 
-  /**
-     * @param {number[]} array
-     */
-  set positions(array) { this.positionBuffer = new VertexBuffer(this.gl, array); }
+	/**
+	   * @param {number[]} array
+	   */
+	set positions(array) {
+		if (array == null) {
+			throw new Error('invalid index array');
+		}
+		this.buffers['a_position'].data = new Float32Array(array);
+	}
 
-  /**
-     * @param {number[]} array
-     */
-  set indices(array) { this.indexBuffer = new IndexBuffer(this.gl, array); }
+	/**
+	   * @param {number[]} array
+	   */
+	set indices(array) {
+		if (array == null) {
+			throw new Error('invalid index array');
+		}
+		this.indexBuffer = new Uint16Array(array);
+		this.count = array.length;
+	}
 }
