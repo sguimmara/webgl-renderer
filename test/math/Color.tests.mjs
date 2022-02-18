@@ -2,10 +2,10 @@ import { describe, it } from 'mocha';
 import assert from 'assert';
 import * as Gfx from '../../src/Gfx';
 
-describe('Rgba', () => {
+describe('Color', () => {
 	describe('constructor', () => {
 		it('should assign [r, g, b, a] fields', () => {
-			const sut = new Gfx.Rgba(1, 2, 3, 4);
+			const sut = new Gfx.Color(1, 2, 3, 4);
 			assert.deepEqual(1, sut.r);
 			assert.deepEqual(2, sut.g);
 			assert.deepEqual(3, sut.b);
@@ -15,7 +15,7 @@ describe('Rgba', () => {
 
 	describe('asTuple', () => {
 		it('should returns the values in the [r, g, b, a] order', () => {
-			const sut = new Gfx.Rgba(1, 2, 3, 4);
+			const sut = new Gfx.Color(1, 2, 3, 4);
 			assert.deepEqual([1, 2, 3, 4], sut.asTuple);
 		});
 	});

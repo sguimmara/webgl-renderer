@@ -61,8 +61,6 @@ export default class Context {
 	 * @param {MaterialBase} material the material to bind.
 	 */
 	bind(material) {
-		console.log(`binding Material ${material.programName}#${material.version}`);
-
 		if (material.uuid in this.materialMap === false) {
 			this.materialMap[material.uuid] = this.createMappedMaterial(material);
 		}

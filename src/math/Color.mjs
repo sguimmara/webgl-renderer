@@ -1,4 +1,4 @@
-export default class Rgba {
+export default class Color {
 	/**
 	   * @param {number} r The red component.
 	   * @param {number} g The green component.
@@ -15,8 +15,4 @@ export default class Rgba {
 	get asTuple() {
 		return [this.r, this.g, this.b, this.a];
 	}
-
-	static get BLACK() { return new Rgba(0, 0, 0, 1); }
-	static get RED() { return new Rgba(1, 0, 0, 1); }
-	static get GREEN() { return new Rgba(0, 1, 0, 1); }
 }

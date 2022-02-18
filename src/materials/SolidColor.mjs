@@ -1,5 +1,5 @@
 import MaterialBase from './MaterialBase';
-import RgbaUniform from '../renderer/RgbaUniform';
+import ColorUniform from '../renderer/ColorUniform';
 
 export default class SolidColor extends MaterialBase {
 	constructor() {
@@ -9,12 +9,12 @@ export default class SolidColor extends MaterialBase {
 				size: 3
 			}
 		};
-		this.uniforms.color = new RgbaUniform('u_color');
+		this.uniforms.color = new ColorUniform('u_color');
 	}
 
-	/** @param {Rgba} rgba The new color. */
-	set color(rgba) {
-		this.uniforms.color.value = rgba;
+	/** @param {Color} Color The new color. */
+	set color(Color) {
+		this.uniforms.color.value = Color;
 		this.dirty();
 	}
 }
