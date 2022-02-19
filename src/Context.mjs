@@ -1,6 +1,6 @@
 import ProgramLoader from "./backends/webgl/ProgramLoader.mjs";
 import WebGLMaterial from "./backends/webgl/WebGLMaterial.mjs";
-import GlBuffer from "./renderer/GlBuffer.js";
+import GlBuffer from "./backends/webgl/GlBuffer.js";
 
 export default class Context {
 	/**
