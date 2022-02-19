@@ -9,7 +9,11 @@ export default class MaterialBase extends BaseObject {
 		this.programName = programName;
 		this.version = 0;
 		this.uniforms = {}
-		this.attributes = {}
+		this.attributes = {
+			'a_position': {
+				size: 3
+			}
+		};
 	}
 
 	dirty() { this.version += 1; }
