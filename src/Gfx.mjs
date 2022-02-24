@@ -5,7 +5,7 @@ export { default as Colors } from './math/Colors';
 
 export { default as MaterialBase } from './materials/MaterialBase';
 export { default as SolidColor } from './materials/SolidColor';
-export { default as Textured } from './materials/Textured';
+export { default as UnlitTexture } from './materials/UnlitTexture';
 
 export { default as Node } from './objects/Node';
 export { default as Mesh } from './objects/Mesh';

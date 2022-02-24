@@ -76,7 +76,6 @@ export default class Context {
 	}
 
 	draw(mesh, material) {
-		console.log(mesh);
 		if (mesh.uuid in this.buffers === false) {
 			this.buffers[mesh.uuid] = {};
 		}
@@ -107,9 +106,10 @@ export default class Context {
 	}
 
 	bindVertexBuffer(entry, material, key, buf) {
+		const GL = this.gl;
 		let vertexBuffer;
 		if (key in entry === false) {
-			vertexBuffer = new GlBuffer(this.gl, key, this.gl.ARRAY_BUFFER);
+			vertexBuffer = new GlBuffer(GL, key, GL.ARRAY_BUFFER);
 			vertexBuffer.update(buf.data);
 			entry[key] = vertexBuffer;
 		}

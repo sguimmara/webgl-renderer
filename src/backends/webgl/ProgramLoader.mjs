@@ -13,6 +13,7 @@ export default class ProgramLoader {
 	async initialize() {
 		await this.loadFromAssets('default.vert.glsl', 'default.frag.glsl', 'default');
 		await this.loadFromAssets('default.vert.glsl', 'solidColor.frag.glsl', 'solidColor');
+		await this.loadFromAssets('textured.vert.glsl', 'textured.frag.glsl', 'unlit-texture');
 	}
 
 	/**
@@ -82,6 +83,7 @@ export default class ProgramLoader {
 		this.gl.attachShader(result, vs);
 		this.gl.attachShader(result, fs);
 		this.gl.linkProgram(result);
+		this.gl.validateProgram(result);
 
 		if (!this.gl.getProgramParameter(result, this.gl.LINK_STATUS)) {
 			const info = this.gl.getProgramInfoLog(result);

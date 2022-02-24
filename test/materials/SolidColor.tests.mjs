@@ -11,7 +11,7 @@ describe('SolidColor', () => {
 		it('should update the <color> uniform with the specified value', () => {
 			const sut = makeSut();
 			sut.color = Gfx.Colors.red;
-			assert.deepEqual(sut.uniforms.color.value, Gfx.Colors.red);
+			assert.deepEqual(sut.uniforms['u_color'].value, Gfx.Colors.red);
 		});
 
 		it('should update the version', () => {

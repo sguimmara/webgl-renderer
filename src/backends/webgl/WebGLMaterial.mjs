@@ -1,3 +1,5 @@
+import TextureObject from "./TextureObject.mjs";
+
 export default class WebGLMaterial {
 	/**
 	   * @param {WebGLRenderingContext} gl The WebGL context.
@@ -14,6 +16,7 @@ export default class WebGLMaterial {
 	}
 
 	set() {
+		this.update();
 		if (this.version !== this.material.version) {
 			this.update();
 			this.version = this.material.version;
@@ -38,17 +41,26 @@ export default class WebGLMaterial {
 	}
 
 	updateUniforms(uniforms) {
-		for (const uniform of Object.values(uniforms)) {
-			let location = this.gl.getUniformLocation(this.program, uniform.location);
-			this.assignUniform(location, uniform);
+		for (const [key, value] of Object.entries(uniforms)) {
+			let location = this.gl.getUniformLocation(this.program, key);
+			this.assignUniform(location, value);
 		}
 	}
 
 	assignUniform(loc, uniform) {
+		const GL = this.gl;
 		switch (uniform.type) {
-			case '4f': {
+			case 'tex2d': {
+				if (uniform.textureObject == undefined) {
+					uniform.textureObject = new TextureObject(GL, uniform.texture);
+				}
+				uniform.textureObject.update();
+				uniform.textureObject.bind(loc);
+				break;
+			}
+			case 'color': {
 				let [x, y, z, w] = uniform.value.asTuple;
-				this.gl.uniform4f(loc, x, y, z, w);
+				GL.uniform4f(loc, x, y, z, w);
 				break;
 			}
 		}
